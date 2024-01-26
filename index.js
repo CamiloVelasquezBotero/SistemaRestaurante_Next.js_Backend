@@ -16,8 +16,14 @@ app.use(express.json());
 dotenv.config();
 
 // Configuracion CORS
-const whiteList = [process.env.FRONTEND_URL]
-app.use( cors({origin: whiteList}) )
+const allowedOrigin = process.env.FRONTEND_URL
+const corsOptions = {
+    origin: allowedOrigin,
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,
+    optionsSuccessStatus: 204,
+  };
+app.use(cors(corsOptions));
 
 // Conexion DB MongoDB
 conectarDb();
